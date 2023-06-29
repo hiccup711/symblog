@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ricky Blog{% endblock %}
+{% block content %}
+    <h1 class="my-4">Blog List
+    </h1>
+
+    <!-- Blog Post -->
+    {% for post in posts %}
+        <div class="card mb-4">
+            {% if post.postImage is not null %}
+                <img class="card-img-top" src="{{ asset(post.postImage, 'file_upload') }}" alt="{{ post.title }}">
+            {% endif %}
+            <div class="card-body">
+                <h2 class="card-title">{{ post.title }}</h2>
+                <p class="card-text">{{ post.summary }}</p>
+                <a href="{{ path('app_post_show', {'id': post.id}) }}" class="btn btn-primary">Read More &rarr;</a>
+            </div>
+            <div class="card-footer text-muted">{{ post.createdAt ? post.createdAt|date('Y-m-d H:i:s') : '' }}
+                <a href="#">Start Bootstrap</a>
+            </div>
+        </div>
+    {% else %}
+        <h3>暂时没有任何文章。</h3>
+    {% endfor %}
+
+    <!-- Pagination -->
+    <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+            <a class="page-link" href="#">&larr; Older</a>
+        </li>
+        <li class="page-item disabled">
+            <a class="page-link" href="#">Newer &rarr;</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,1 @@
+{"base_url":"","routes":{"replay_comment":{"tokens":[["text","\/replay"],["variable","\/","[^\/]++","comment_id",true],["text","\/comment"],["variable","\/","[^\/]++","post_id",true],["text","\/post"]],"defaults":[],"requirements":[],"hosttokens":[],"methods":[],"schemes":[]}},"prefix":"","host":"localhost","port":"","scheme":"http","locale":""}
