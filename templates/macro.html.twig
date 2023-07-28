@@ -1,0 +1,16 @@
+{% macro show_comments(comment, post_id) %}
+    {% import _self as macro %}
+    <div class="media mt-2">
+        <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+        <div class="media-body">
+            <h5 class="mt-0">{{ comment.author }}</h5>
+            {{ comment.message }}
+            <button class="btn btn-sm btn-link js-replay-comment-btn" data-post-id="{{ post_id }}"
+                    data-parent-id="{{ comment.id }}">回复
+            </button>
+            {% for children in comment.children %}
+                {{ macro.show_comments(children, post_id) }}
+            {% endfor %}
+        </div>
+    </div>
+{% endmacro %}

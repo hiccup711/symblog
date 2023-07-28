@@ -19,6 +19,14 @@ Routing.setRoutingData(routes);
 
 $(document).ready(function () {
     $('button.js-replay-comment-btn').on('click', function (element) {
+        let replyCards = $('.reply-comment-card');
+        if (replyCards.length > 0) {
+            replyCards.remove();
+            return;
+        }
+        if ($(this).nextAll('.max-level-info').length === 1) {
+            return;
+        }
         let postId = $(this).data('post-id');
         let parentId = $(this).data('parent-id');
 

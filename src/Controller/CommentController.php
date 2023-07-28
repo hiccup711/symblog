@@ -17,10 +17,15 @@ class CommentController extends AbstractController
     #[
         Route('/post/{post_id}/comment/{comment_id}/replay', name: 'replay_comment', options: ['expose' => true]),
         ParamConverter('post', options: ['id' => 'post_id']),
-        ParamConverter('comment', options: ['id' => 'comment_id']),
+        ParamConverter('parentComment', options: ['id' => 'comment_id']),
     ]
     public function replyComment(Request $request, Post $post, Comment $parentComment, EntityManagerInterface $entityManager): Response
     {
+        $maxLevel = $this->getParameter('max_comment_level');
+        if ($parentComment->getLevel() >= $maxLevel) {
+            return new Response ('<p class="max-level-info">' . sprintf('最多只能回复 %s 级评论', $maxLevel) . '</p>');
+        }
+
         $replayComment = $this->createForm(CommentType::class, null, [
             'action' => $request->getUri()
         ]);
@@ -33,8 +38,7 @@ class CommentController extends AbstractController
              */
             $data = $replayComment->getData();
             $data->setParent($parentComment);
-            $data->setPost($post);
-
+            $data->setLevel($parentComment->getLevel() + 1);
             $entityManager->persist($data);
 
             $entityManager->flush();

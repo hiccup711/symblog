@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Comment;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -26,7 +27,7 @@ class CommentType extends AbstractType
                 ],
                 // 单行 input 配置
                 'attr' => [
-                    'class' => 'form-control-sm w-50'
+                    'class' => 'form-control-sm w-50 flex-grow-1'
                 ],
                 'required' => true
             ])
@@ -41,7 +42,7 @@ class CommentType extends AbstractType
                 ],
                 // 单行 input 配置
                 'attr' => [
-                    'class' => 'form-control-sm w-50'
+                    'class' => 'form-control-sm w-50 flex-grow-1'
                 ]
             ])
             ->add('message', TextareaType::class, [
@@ -55,7 +56,15 @@ class CommentType extends AbstractType
                 ],
                 // 单行 input 配置
                 'attr' => [
-                    'class' => 'form-control-sm w-50'
+                    'class' => 'form-control-sm w-50 flex-grow-1'
+                ]
+            ])
+            ->add('submit', SubmitType::class, [
+                'row_attr' => [
+                    'class' => 'form-inline justify-content-end'
+                ],
+                'attr' => [
+                    'class' => 'btn btn-primary'
                 ]
             ]);
     }

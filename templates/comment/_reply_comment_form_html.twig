@@ -1,6 +1,6 @@
 <div class="reply-comment-card card">
     <div class="card-header">回复评论：</div>
-    <div class="card-body">
+    <div class="card-body pr-5">
         {{ form_start(replay_comment_form) }}
         <div class="my-custom-class-for-errors">
             {{ form_errors(replay_comment_form) }}
@@ -16,7 +16,7 @@
             {{ form_row(replay_comment_form.message) }}
         </div>
         <div class="form-group pl-5">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            {{ form_row(replay_comment_form.submit) }}
         </div>
         {{ form_end(replay_comment_form) }}
     </div>

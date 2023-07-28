@@ -3,7 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Comment;
+use App\Entity\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -39,6 +41,13 @@ class CommentRepository extends ServiceEntityRepository
         }
     }
 
+    public function getPaginatorQuery(Post $post): Query
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.post = :post')
+            ->setParameter('post', $post)
+            ->getQuery();
+    }
 //    /**
 //     * @return Comment[] Returns an array of Comment objects
 //     */
